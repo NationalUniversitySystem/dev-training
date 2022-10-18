@@ -7,14 +7,23 @@
 
 	<body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">My Site!</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
 			<?php 
 				wp_nav_menu( 
 					array( 
-						'theme_location' => 'header-nav-menu',
-						'menu_class' => 'navbar-nav mr-auto',
+						'container_class' => 'collapse navbar-collapse',
+						'container_id'    => 'navbarNav',
+						'menu_class'      => 'navbar-nav',
+						'theme_location'  => 'header-nav-menu',
 					) 
-				); ?>
+				); 
+			?>
+
 		</div>
 	</nav>
