@@ -59,3 +59,14 @@ add_action( 'init', 'dans_theme__register_hike_post_type' );
 
 
 
+function dans_theme__register_hike_custom_field(){
+	$fm = new Fieldmanager_TextField( array(
+        'name' => 'demo-field',
+    ) );
+	
+    $fm->add_meta_box( 'TextField Demo', array( 'hike' ) );
+}
+
+
+add_action( 'fm_post_hike', 'dans_theme__register_hike_custom_field');
+
