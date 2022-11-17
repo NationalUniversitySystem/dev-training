@@ -59,14 +59,33 @@ add_action( 'init', 'dans_theme__register_hike_post_type' );
 
 
 
-function dans_theme__register_hike_custom_field(){
-	$fm = new Fieldmanager_TextField( array(
-        'name' => 'demo-field',
+function dans_theme__register_hike_custom_fields(){
+	$fm_date = new Fieldmanager_Datepicker( array(
+        'name' => 'hike-date',
+		'date_format' => 'Y-m-d',
+        'js_opts' => array(
+            'dateFormat' => 'yy-mm-dd',
+        ),
     ) );
-	
-    $fm->add_meta_box( 'TextField Demo', array( 'hike' ) );
+    $fm_date->add_meta_box( 'Date of Hike', array( 'hike' ) );
+
+	$fm_elevation = new Fieldmanager_TextField( array(
+		'name' => 'hike-elevation',
+    ) );
+    $fm_elevation->add_meta_box( 'Hike Elevation', array( 'hike' ) );
+
+	$fm_overnight = new Fieldmanager_Radios( array(
+		'name' => 'hike-overnight',
+		'options' => array(
+			'yes' => 'Yes',
+			'no'  => 'No',
+		),
+	) );
+	$fm_overnight->add_meta_box( 'Was Hike Overnight?', array( 'hike' ) );
+
 }
 
 
-add_action( 'fm_post_hike', 'dans_theme__register_hike_custom_field');
+add_action( 'fm_post_hike', 'dans_theme__register_hike_custom_fields');
+
 
