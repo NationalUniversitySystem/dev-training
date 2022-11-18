@@ -60,28 +60,36 @@ add_action( 'init', 'dans_theme__register_hike_post_type' );
 
 
 function dans_theme__register_hike_custom_fields(){
-	$fm_date = new Fieldmanager_Datepicker( array(
-        'name' => 'hike-date',
-		'date_format' => 'Y-m-d',
-        'js_opts' => array(
-            'dateFormat' => 'yy-mm-dd',
-        ),
-    ) );
-    $fm_date->add_meta_box( 'Date of Hike', array( 'hike' ) );
 
-	$fm_elevation = new Fieldmanager_TextField( array(
-		'name' => 'hike-elevation',
-    ) );
-    $fm_elevation->add_meta_box( 'Hike Elevation', array( 'hike' ) );
+	$fm = new Fieldmanager_Group( [
+		'name'           => 'hike_data', 
+		'label'          => 'Hike Data',
+		'serialize_data' => false,
+		'children' => [
+			'hike-date' => new Fieldmanager_Datepicker( array(
+				'label' => "Date of Hike",
+				'description' => "Enter the date that the hike occurred",
+				'date_format' => 'Y-m-d',
+				'js_opts' => array(
+					'dateFormat' => 'yy-mm-dd',
+				),
+			) ),
+			'hike-elevation' => new Fieldmanager_TextField( array(
+				'name' => 'hike-elevation',
+				'label' => "Hike Elevation (ft)",
+    		) ),
+			'hike-overnight' => new Fieldmanager_Radios( array(
+				'name' => 'hike-overnight',
+				'label' => "Was Hike Overnight?",
+				'options' => array(
+					'yes' => 'Yes',
+					'no'  => 'No',
+				),
+			) ),
+		],
+	] );
 
-	$fm_overnight = new Fieldmanager_Radios( array(
-		'name' => 'hike-overnight',
-		'options' => array(
-			'yes' => 'Yes',
-			'no'  => 'No',
-		),
-	) );
-	$fm_overnight->add_meta_box( 'Was Hike Overnight?', array( 'hike' ) );
+	$fm->add_meta_box( 'Hike Data', array( 'hike' ) );
 
 }
 
