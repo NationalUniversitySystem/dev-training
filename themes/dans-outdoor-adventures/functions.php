@@ -97,3 +97,22 @@ function dans_theme__register_hike_custom_fields(){
 add_action( 'fm_post_hike', 'dans_theme__register_hike_custom_fields');
 
 
+
+
+function dans_theme__register_hike_taxonomies(){
+
+
+	$args = array(
+		'label' => 'Type of Hike',
+		'hierarchical' => true, 
+		'public' => true,
+		'show_admin_column' => true,
+		'show_in_rest' => true,
+	);
+
+
+	register_taxonomy( 'hike-type', 'hike', $args );
+
+}
+
+add_action( 'init', 'dans_theme__register_hike_taxonomies' );
